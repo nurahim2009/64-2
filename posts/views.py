@@ -1,12 +1,25 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Post
+from django.shortcuts import render, redirect
+from .models import Post, Category
+from .forms import CategoryForm, PostForm
 
-# Главная страница
-def home(request):
-    posts = Post.objects.filter(is_published=True, rate__gt=5).order_by('-created_at')
-    return render(request, 'posts/index.html', {'posts': posts})
+# Создание категории
+def create_category(request):
+    if request.method == "POST":
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = CategoryForm()
+    return render(request, 'posts/create_category.html', {'form': form})
 
-# ВОТ ЭТА ФУНКЦИЯ ДОЛЖНА БЫТЬ ЗДЕСЬ:
-def post_detail(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    return render(request, 'posts/post_detail.html', {'post': post})
+# Создание поста
+def create_post(request):
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = PostForm()
+    return render(request, 'posts/create_post.html', {'form': form})

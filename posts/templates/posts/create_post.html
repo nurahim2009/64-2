@@ -1,0 +1,11 @@
+{% extends 'posts/base.html' %}
+{% block content %}
+    <h2>Создать новый пост</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Опубликовать пост</button>
+    </form>
+    <hr>
+    <p>Не нашли нужную категорию? <a href="{% url 'create_category' %}" class="btn btn-sm btn-outline-secondary">Создать категорию прямо здесь</a></p>
+{% endblock %}
