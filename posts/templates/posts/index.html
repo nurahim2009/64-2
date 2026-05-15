@@ -1,19 +1,5 @@
-{% extends 'posts/base.html' %}
-
-{% block content %}
-    <h1>Популярные посты</h1>
-    <div class="list-group">
-    {% for post in posts %}
-        <div class="card mb-3">
-            <div class="card-body">
-                <h2 class="card-title">{{ post.title }}</h2>
-                <p class="badge bg-primary">Рейтинг: {{ post.rate }}</p>
-                <p class="card-text">{{ post.content|truncatewords:20 }}</p>
-                <a href="{% url 'post_detail' post.pk %}" class="btn btn-outline-info">Читать далее</a>
-            </div>
-        </div>
-    {% empty %}
-        <p>Пока нет подходящих постов.</p>
+<div>
+    {% for tag in post.tags.all %}
+        <span class="badge bg-secondary">#{{ tag.name }}</span>
     {% endfor %}
-    </div>
-{% endblock %}
+</div>

@@ -1,1 +1,8 @@
-<h1>{{post.title}}</h1> <p>{{post.content}}</p> <p>Rate: {{post.rate}}</p> <a href='/'>Назад</a>
+<div class="mt-2 mb-4">
+    <strong>Теги:</strong>
+    {% for tag in post.tags.all %}
+        <span class="badge rounded-pill bg-info text-dark">#{{ tag.name }}</span>
+    {% empty %}
+        <span class="text-muted">Тегов нет</span>
+    {% endfor %}
+</div>

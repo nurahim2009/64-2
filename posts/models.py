@@ -11,7 +11,6 @@ class Post(models.Model):
     content = models.TextField()
     rate = models.IntegerField(default=0)
     is_published = models.BooleanField(default=False)
-    # Добавляем связь с категорией
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='posts', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
