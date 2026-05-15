@@ -1,10 +1,10 @@
 from django import forms
-from .models import Post, Tag
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
-class PostForm(forms.ModelForm):
+class RegisterForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+
     class Meta:
-        model = Post
-        fields = ['title', 'content', 'rate', 'category', 'tags', 'is_published']
-        widgets = {
-            'tags': forms.CheckboxSelectMultiple(), # Позволяет выбирать галочками
-        }
+        model = User
+        fields = ["username", "email"]

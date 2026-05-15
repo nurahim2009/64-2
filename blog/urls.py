@@ -1,11 +1,9 @@
-from django.contrib import admin
-from django.urls import path  
-from posts import views
+from django.urls import path, include # Добавь include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')), # Это добавит login/logout автоматически
+    path('register/', views.register, name='register'),
     path('', views.home, name='home'),
-    path('post/<int:pk>/', views.post_detail, name='post_detail'),
-    path('category/add/', views.create_category, name='create_category'),
-    path('post/add/', views.create_post, name='create_post'),
+    # ... остальные пути
 ]
